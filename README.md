@@ -1,1 +1,3 @@
-# Mvc
+# MVC
+
+The MVC Component.
