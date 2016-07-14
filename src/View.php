@@ -13,7 +13,7 @@ namespace miBadger\Mvc;
 /**
  * The view class of the MVC pattern.
  *
- * @see http://en.wikipedia.org/wiki/Model–view–controller
+ * @see http://en.wikipedia.org/wiki/Model-view-controller
  * @since 1.0.0
  */
 class View
