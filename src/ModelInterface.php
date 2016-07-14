@@ -13,7 +13,7 @@ namespace miBadger\MVC;
 /**
  * The model interface.
  *
- * @see http://en.wikipedia.org/wiki/Model–view–controller
+ * @see http://en.wikipedia.org/wiki/Model-view-controller
  * @since 1.0.0
  */
 interface ModelInterface

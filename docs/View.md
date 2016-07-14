@@ -5,6 +5,8 @@ The View class.
 ## Example(s)
 
 ```php
-// Get view.
-View::get('View.php', ['key', 'value']);
+/**
+ * Returns the view at the given path with the given data.
+ */
+View::get('View.php', ['name' => 'value']);
 ```
