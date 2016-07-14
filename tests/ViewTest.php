@@ -28,12 +28,12 @@ class ViewTest extends \PHPUnit_Framework_TestCase
 		vfsStreamWrapper::setRoot(new vfsStreamDirectory('test'));
 		vfsStreamWrapper::getRoot()->addChild(new vfsStreamFile('file.txt'));
 
-		file_put_contents(vfsStream::url('test/file.txt'), '<?php echo $key; ?>');
+		file_put_contents(vfsStream::url('test/file.txt'), '<?php echo $name; ?>');
 	}
 
 	public function testGet()
 	{
-		$this->assertEquals('value', View::get(vfsStream::url('test/file.txt'), ['key' => 'value']));
+		$this->assertEquals('value', View::get(vfsStream::url('test/file.txt'), ['name' => 'value']));
 	}
 
 	/**
