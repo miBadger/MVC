@@ -14,13 +14,14 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamFile;
 use org\bovigo\vfs\vfsStreamWrapper;
+use PHPUnit\Framework\TestCase;
 
 /**
  * The view test.
  *
  * @since 1.0.0
  */
-class ViewTest extends \PHPUnit_Framework_TestCase
+class ViewTest extends TestCase
 {
 	public function setUp()
 	{
@@ -37,7 +38,7 @@ class ViewTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException \PHPUnit_Framework_Error_Warning
+	 * @expectedException \PHPUnit\Framework\Error\Warning
 	 * @expectedExceptionMessage vfs://test/fake.txt
 	 * @expectedExceptionCode 2
 	 */
