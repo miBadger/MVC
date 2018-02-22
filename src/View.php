@@ -23,7 +23,7 @@ class View
 
 	const DIRECTORY_SEPARATOR = \DIRECTORY_SEPARATOR;
 
-	/** @var string the base path. */
+	/** @var string|null the base path. */
 	private $basePath;
 
 	/**
@@ -37,7 +37,7 @@ class View
 	/**
 	 * Returns the base path.
 	 *
-	 * @return string the base path.
+	 * @return string|null the base path.
 	 */
 	public static function getBasePath()
 	{
@@ -47,7 +47,7 @@ class View
 	/**
 	 * Set the base path.
 	 *
-	 * @param string $basePath = null
+	 * @param string|null $basePath = null
 	 */
 	public static function setBasePath($basePath = null)
 	{
@@ -70,13 +70,13 @@ class View
 		try {
 			$basePath = static::getInstance()->basePath;
 
-			if ($basePath) {
+			if ($basePath !== null) {
 				if (mb_substr($path, 0, 1) === static::DIRECTORY_SEPARATOR) {
-					$this->$path = mb_substr($path, 1);
+					$path = mb_substr($path, 1);
 				}
 
 				if (mb_substr($basePath, -1) === static::DIRECTORY_SEPARATOR) {
-					$this->$basePath = mb_substr($basePath, 0, -1);
+					$basePath = mb_substr($basePath, 0, -1);
 				}
 
 				$path = $basePath . static::DIRECTORY_SEPARATOR . $path;
