@@ -23,7 +23,7 @@ class View
 
 	const DIRECTORY_SEPARATOR = \DIRECTORY_SEPARATOR;
 
-	/** @var string the base path. */
+	/** @var string|null the base path. */
 	private $basePath;
 
 	/**
@@ -47,7 +47,7 @@ class View
 	/**
 	 * Set the base path.
 	 *
-	 * @param string $basePath = null
+	 * @param string|null $basePath = null
 	 */
 	public static function setBasePath($basePath = null)
 	{
