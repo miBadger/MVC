@@ -37,7 +37,7 @@ class View
 	/**
 	 * Returns the base path.
 	 *
-	 * @return string the base path.
+	 * @return string|null the base path.
 	 */
 	public static function getBasePath()
 	{
@@ -70,7 +70,7 @@ class View
 		try {
 			$basePath = static::getInstance()->basePath;
 
-			if ($basePath) {
+			if ($basePath !== null) {
 				if (mb_substr($path, 0, 1) === static::DIRECTORY_SEPARATOR) {
 					$path = mb_substr($path, 1);
 				}
