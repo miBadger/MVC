@@ -9,6 +9,8 @@
 
 namespace miBadger\Mvc;
 
+use miBadger\Singleton\SingletonTrait;
+
 /**
  * The view class of the MVC pattern.
  *
@@ -17,6 +19,41 @@ namespace miBadger\Mvc;
  */
 class View
 {
+	use SingletonTrait;
+
+	const DIRECTORY_SEPARATOR = \DIRECTORY_SEPARATOR;
+
+	/** @var string the base path. */
+	private $basePath;
+
+	/**
+	 * Construct a object.
+	 */
+	protected function __construct()
+	{
+		$this->basePath = null;
+	}
+
+	/**
+	 * Returns the base path.
+	 *
+	 * @return string the base path.
+	 */
+	public static function getBasePath()
+	{
+		return static::getInstance()->basePath;
+	}
+
+	/**
+	 * Set the base path.
+	 *
+	 * @param string $basePath = null
+	 */
+	public static function setBasePath($basePath = null)
+	{
+		static::getInstance()->basePath = $basePath;
+	}
+
 	/**
 	 * Returns the view at the given path with the given data.
 	 *
@@ -31,6 +68,20 @@ class View
 		extract($data);
 
 		try {
+			$basePath = static::getInstance()->basePath;
+
+			if ($basePath) {
+				if (mb_substr($path, 0, 1) === static::DIRECTORY_SEPARATOR) {
+					$this->$path = mb_substr($path, 1);
+				}
+
+				if (mb_substr($basePath, -1) === static::DIRECTORY_SEPARATOR) {
+					$this->$basePath = mb_substr($basePath, 0, -1);
+				}
+
+				$path = $basePath . static::DIRECTORY_SEPARATOR . $path;
+			}
+
 			include $path;
 		} catch (\Exception $e) {
 			ob_get_clean();

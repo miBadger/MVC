@@ -24,6 +24,12 @@ class ViewTest extends TestCase
 {
 	public function setUp()
 	{
+		$object = View::getInstance();
+		$reflection = new \ReflectionClass(get_class($object));
+		$method = $reflection->getMethod('__construct');
+		$method->setAccessible(true);
+		$method->invokeArgs($object, []);
+
 		vfsStreamWrapper::register();
 		vfsStreamWrapper::setRoot(new vfsStreamDirectory('test'));
 		vfsStreamWrapper::getRoot()->addChild(new vfsStreamFile('file.txt'));
@@ -31,9 +37,28 @@ class ViewTest extends TestCase
 		file_put_contents(vfsStream::url('test/file.txt'), '<?php echo $name; ?>');
 	}
 
+	public function testGetBasePath()
+	{
+		$this->assertNull(View::getBasePath());
+	}
+
+	public function testSetBasePath()
+	{
+		$this->assertNull(View::getBasePath());
+
+		$this->assertNull(View::setBasePath('test/'));
+		$this->assertEquals('test/', View::getBasePath());
+
+		$this->assertNull(View::setBasePath('test2'));
+		$this->assertEquals('test2', View::getBasePath());
+	}
+
 	public function testGet()
 	{
 		$this->assertEquals('value', View::get(vfsStream::url('test/file.txt'), ['name' => 'value']));
+
+		$this->assertNull(View::setBasePath(vfsStream::url('test')));
+		$this->assertEquals('value', View::get('file.txt', ['name' => 'value']));
 	}
 
 	/**
