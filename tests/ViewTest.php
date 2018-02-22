@@ -59,6 +59,11 @@ class ViewTest extends TestCase
 
 		$this->assertNull(View::setBasePath(vfsStream::url('test')));
 		$this->assertEquals('value', View::get('file.txt', ['name' => 'value']));
+		$this->assertEquals('value', View::get('/file.txt', ['name' => 'value']));
+
+		$this->assertNull(View::setBasePath(vfsStream::url('test/')));
+		$this->assertEquals('value', View::get('file.txt', ['name' => 'value']));
+		$this->assertEquals('value', View::get('/file.txt', ['name' => 'value']));
 	}
 
 	/**

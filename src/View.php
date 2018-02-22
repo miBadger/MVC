@@ -72,11 +72,11 @@ class View
 
 			if ($basePath) {
 				if (mb_substr($path, 0, 1) === static::DIRECTORY_SEPARATOR) {
-					$this->$path = mb_substr($path, 1);
+					$path = mb_substr($path, 1);
 				}
 
 				if (mb_substr($basePath, -1) === static::DIRECTORY_SEPARATOR) {
-					$this->$basePath = mb_substr($basePath, 0, -1);
+					$basePath = mb_substr($basePath, 0, -1);
 				}
 
 				$path = $basePath . static::DIRECTORY_SEPARATOR . $path;
