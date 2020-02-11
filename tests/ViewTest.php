@@ -22,7 +22,7 @@ use PHPUnit\Framework\TestCase;
  */
 class ViewTest extends TestCase
 {
-	public function setUp()
+	public function setUp(): void
 	{
 		$object = View::getInstance();
 		$reflection = new \ReflectionClass(get_class($object));
@@ -66,13 +66,12 @@ class ViewTest extends TestCase
 		$this->assertEquals('value', View::get('/file.txt', ['name' => 'value']));
 	}
 
-	/**
-	 * @expectedException \PHPUnit\Framework\Error\Warning
-	 * @expectedExceptionMessage vfs://test/fake.txt
-	 * @expectedExceptionCode 2
-	 */
 	public function testGetException()
 	{
+		$this->expectException(\PHPUnit\Framework\Error\Warning::class);
+		$this->expectExceptionMessage("vfs://test/fake.txt");
+		$this->expectExceptionCode(2);
+
 		View::get(vfsStream::url('test/fake.txt'));
 	}
 }
